@@ -1,11 +1,13 @@
-const http = require("http");
-const server = http.createServer((request, response) => {
-  response.end("Hello World!");
+const express = require("express");
+const app = express();
+const userRoute = require("./src/routes/userRoute.js");
+
+app.get("/", (req, res) => {
+  console.log("servidor creado con express.js");
 });
 
-const port = 5000;
-const host = "localhost";
+app.use("/users", userRoute);
 
-server.listen(port, host, () => {
-  console.log(`Servidor ejecutandose en http://${host}:${port}`);
+app.listen(3000, () => {
+  console.log("Aplicacion con express, ejecutandose en el puerto 3000");
 });
