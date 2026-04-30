@@ -6,6 +6,7 @@ app.get("/", (req, res) => {
   console.log("servidor creado con express.js");
 });
 
+app.use(express.json());
 app.use("/users", userRoute);
 
 app.listen(3000, () => {
