@@ -1,9 +1,25 @@
-const express = require("express");
-const app = express();
-const userRoute = require("./src/routes/userRoute.js");
+import express from "express";
+import path from "path";
+import { fileURLToPath } from 'url';
 
-app.get("/", (req, res) => {
-  console.log("servidor creado con express.js");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+import userRoute from "./src/routes/userRoute.js";
+import connection from './database/connection.js';
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.get('/', (req, res) => {
+  const data = {
+    title: 'titulo de la pagina',
+    message: 'Bienvenido a mi sitio web',
+    showMessage: true,
+    items: [1, 2, 3, 4]
+  }
+  res.render('index', data);
 });
 
 app.use(express.json());
